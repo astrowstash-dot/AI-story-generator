@@ -49,6 +49,7 @@ if Button :
                 if "error" in generate_story or "failed" in generate_story or "API key" in generate_story:
                     st.error(generate_story)
                 else:
+                    st.subheader(f"Your {style} story:")
                     st.success(generate_story)
 
             except Exception as e:

@@ -16,7 +16,7 @@ def create_advanced_prompt(style):
     # --- Base prompt ---
     base_prompt = f"""
     **Your Persona:** You are a friendly and engaging storyteller. Your goal is to tell a story that is fun and easy to read.
-    **Your Main Goal:** Write a story in simple, clear, and modern English.
+    **Your Main Goal:** Write a story in clear, and modern English.
     **Your Task:** Create one single story that connects all the provided images in order.
     **Style Requirement:** The story must fit the '{style}' genre.
     **Core Instructions:**
@@ -48,7 +48,7 @@ def Generate_story_from_images(images, style):
 
     responce= client.models.generate_content(
   model= "gemini-2.5-flash-lite",
-  contents=[images, f"generate a brief {style} story based on images"] 
+  contents=[images, create_advanced_prompt(style)] 
     )
 
-    return(responce)
+    return responce.text
