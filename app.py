@@ -1,5 +1,5 @@
 import streamlit as st
-from story_generator import Generate_story_from_images
+from story_generator import Generate_story_from_images, narrate_story
 from PIL import Image
 
 
@@ -51,6 +51,11 @@ if Button :
                 else:
                     st.subheader(f"Your {style} story:")
                     st.success(generate_story)
+
+                st.subheader("Listen to the story:")
+                audio_file= narrate_story(generate_story)
+                if audio_file:
+                    st.audio(audio_file, format="audio/mp3")    
 
             except Exception as e:
                 st.error(f"An application error occurred {e}")

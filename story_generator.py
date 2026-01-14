@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
 import os
 from google import genai
+from gtts import gTTS
+from io import BytesIO  
 
 load_dotenv()
 
@@ -52,3 +54,19 @@ def Generate_story_from_images(images, style):
     )
 
     return responce.text
+
+
+
+# function of audio file 
+
+def narrate_story(story_text):
+    try:
+        tts = gTTS(text=story_text, lang="en", slow=False)
+        audio_f= BytesIO()   # stores the audio using BytesIO (instead of saving a file)
+        tts.write_to_fp(audio_f) # -  Writes the audio data into your BytesIO object.
+        audio_f.seek(0)  # back to the strat to read from beginning
+        return audio_f
+    except Exception as e : 
+        return f"an unexpected error occured"   
+
+
